@@ -71,31 +71,26 @@ Waiting for camera...
 const camera = document.getElementById("camera");
 const statusText = document.getElementById("status");
 
-async function startCamera(){
+navigator.mediaDevices.getUserMedia({
+    video:true,
+    audio:false
+})
+.then(function(stream){
 
-    try{
+    camera.srcObject = stream;
 
-        const stream =
-        await navigator.mediaDevices.getUserMedia({
-            video:true
-        });
+    camera.play();
 
-        camera.srcObject = stream;
+    statusText.innerText =
+    "Camera connected successfully";
 
-        statusText.innerText =
-        "Camera connected successfully";
+})
+.catch(function(error){
 
-    }catch(error){
+    statusText.innerText =
+    "Camera error: " + error.message;
 
-        statusText.innerText =
-        "Camera access denied";
-
-        console.error(error);
-    }
-
-}
-
-startCamera();
+});
 
 </script>
 

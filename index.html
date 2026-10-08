@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Smart Welcome Screen</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> src="https://cdn.jsdelivr.net/npm/odels/blazefacescript>
 
 <style>
 body{
@@ -12,56 +13,52 @@ body{
     background:#002B5C;
     color:white;
     font-family:Arial,sans-serif;
+    text-align:center;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
-    text-align:center;
 }
 
 .container{
     max-width:800px;
-    padding:40px;
 }
 
 h1{
     font-size:60px;
-    margin-bottom:20px;
 }
 
-p{
+#status{
     font-size:24px;
+    margin-top:20px;
 }
 
 #message{
-    margin-top:30px;
-    font-size:32px;
+    font-size:34px;
     color:#FFD700;
+    margin-top:20px;
 }
 
 video{
     position:fixed;
     top:10px;
     right:10px;
-    width:220px;
+    width:250px;
     border:3px solid white;
-    border-radius:12px;
+    border-radius:10px;
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
+    <h1>Welcome</h1>
 
-<h1>Welcome</h1>
+    <div id="status">
+        Loading camera...
+    </div>
 
-<p id="status">
-Waiting for camera...
-</p>
-
-<div id="message"></div>
-
+    <div id="message"></div>
 </div>
 
 <video id="camera" autoplay playsinline muted></video>
@@ -69,28 +66,75 @@ Waiting for camera...
 <script>
 
 const camera = document.getElementById("camera");
-const statusText = document.getElementById("status");
+const status = document.getElementById("status");
+const message = document.getElementById("message");
 
-navigator.mediaDevices.getUserMedia({
-    video:true,
-    audio:false
-})
-.then(function(stream){
+let cooldown = false;
 
-    camera.srcObject = stream;
+const greetings = [
+    "😊 Welcome! Great to see you today.",
+    "🌟 Have a wonderful day.",
+    "📚 Good luck with your studies.",
+    "👏 Keep up the great work.",
+    "💙 Welcome to ECAE.",
+    "☀️ Have a productive day."
+];
 
-    camera.play();
+async function startCamera() {
 
-    statusText.innerText =
-    "Camera connected successfully";
+    try {
 
-})
-.catch(function(error){
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: true
+        });
 
-    statusText.innerText =
-    "Camera error: " + error.message;
+        camera.srcObject = stream;
 
-});
+        status.innerText = "Camera connected successfully";
+
+        const model = await blazeface.load();
+
+        status.innerText = "Waiting for visitor...";
+
+        setInterval(async () => {
+
+            if (cooldown) return;
+
+            const predictions =
+              await model.estimateFaces(camera, false);
+
+            if (predictions.length > 0) {
+
+                cooldown = true;
+
+                status.innerText = "Person detected";
+
+                message.innerText =
+                  greetings[Math.floor(Math.random() * greetings.length)];
+
+                setTimeout(() => {
+
+                    message.innerText = "";
+                    status.innerText = "Waiting for visitor...";
+                    cooldown = false;
+
+                }, 5000);
+            }
+
+        }, 1000);
+
+    }
+
+    catch(error){
+
+        status.innerText =
+        "Camera error: " + error.message;
+
+    }
+
+}
+
+startCamera();
 
 </script>
 

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Welcome Screen</title>
+
+<style>
+body{
+    margin:0;
+    background:#002B5C;
+    color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+.container{
+    max-width:800px;
+    padding:40px;
+}
+
+h1{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:24px;
+}
+
+#message{
+    margin-top:30px;
+    font-size:32px;
+    color:#FFD700;
+}
+
+video{
+    position:fixed;
+    top:10px;
+    right:10px;
+    width:220px;
+    border:3px solid white;
+    border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Welcome</h1>
+
+<p id="status">
+Waiting for camera...
+</p>
+
+<div id="message"></div>
+
+</div>
+
+<video id="camera" autoplay playsinline muted></video>
+
+<script>
+
+const camera = document.getElementById("camera");
+const statusText = document.getElementById("status");
+
+async function startCamera(){
+
+    try{
+
+        const stream =
+        await navigator.mediaDevices.getUserMedia({
+            video:true
+        });
+
+        camera.srcObject = stream;
+
+        statusText.innerText =
+        "Camera connected successfully";
+
+    }catch(error){
+
+        statusText.innerText =
+        "Camera access denied";
+
+        console.error(error);
+    }
+
+}
+
+startCamera();
+
+</script>
+
+</body>
+</html>

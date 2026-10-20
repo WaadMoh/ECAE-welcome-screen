@@ -1,9 +1,8 @@
 const video = document.getElementById("video");
 const statusText = document.getElementById("status");
 const message = document.getElementById("message");
-const startBtn = document.getElementById("startBtn");
 
-startBtn.addEventListener("click", async () => {
+window.addEventListener("load", async () => {
     try {
         statusText.innerHTML = "Starting camera...";
 
@@ -14,10 +13,8 @@ startBtn.addEventListener("click", async () => {
 
         video.srcObject = stream;
 
-        video.style.display = "block";
-
         statusText.innerHTML = "✅ Camera Connected";
-        message.innerHTML = "👋 Welcome to ECAE";
+        message.innerHTML = "Waiting for someone...";
 
     } catch (error) {
         statusText.innerHTML = "❌ Camera Error: " + error.message;

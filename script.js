@@ -38,33 +38,25 @@ async function detectPerson() {
     model = await blazeface.load();
 
         setInterval(async () => {
+
+            const predictions = await model.estimateFaces(video, false);
         
-            const predictions = await model.estimateFaces(
-                video,
-                false
-            );
+            if (
+                predictions.length > 0 &&
+                predictions[0].probability &&
+                predictions[0].probability[0] > 0.95
+            ) {
         
-            console.log(predictions);
-        
-            if (predictions.length > 0) {
-        
-                statusText.textContent =
-                    "Face detected (" + predictions.length + ")";
-        
-                message.textContent =
-                    "👋 Welcome to ECAE!";
+                message.textContent = "👋 Welcome to ECAE!";
         
             } else {
         
-                statusText.textContent =
-                    "No face detected";
-        
-                message.textContent =
-                    "Waiting for someone...";
+                message.textContent = "Waiting for someone...";
         
             }
         
         }, 1000);
+
 }
 
 window.addEventListener("load", startCamera);

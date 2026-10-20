@@ -1,8 +1,9 @@
 const video = document.getElementById("video");
 const statusText = document.getElementById("status");
 const message = document.getElementById("message");
-const startBtn = document.getElementById("startBtn");
-
+startBtn.addEventListener("click", () => {
+    alert("Button works");
+});
 let greeted = false;
 
 const greetings = [

@@ -2,6 +2,9 @@ const video = document.getElementById("video");
 const status = document.getElementById("status");
 const message = document.getElementById("message");
 
+document
+.getElementById("startBtn")
+.addEventListener("click", initialize);
 let greeted = false;
 
 const messages = [

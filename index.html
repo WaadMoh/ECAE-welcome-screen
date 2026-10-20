@@ -7,6 +7,7 @@
 <title>ECAE Welcome Screen</title>
 
 <link rel="stylesheet" href="style.css">
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
 </head>
@@ -24,9 +25,8 @@
         <h2>كلية الإمارات للتطوير التربوي</h2>
 
         <div id="status">
-            Ready
+            Starting camera...
         </div>
-
 
         <video
             id="video"
@@ -42,18 +42,17 @@
                 border-radius:15px;
             ">
         </video>
-        
-        <p id="status">Waiting for camera...</p>
-        
-        <div id="message"></div>
-        
+
+        <div id="message">
+            Waiting for someone...
+        </div>
 
     </div>
 
 </div>
 
-<script src="script.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>

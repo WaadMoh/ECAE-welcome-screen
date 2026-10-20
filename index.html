@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>ECAE Welcome Screen</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js">
+    </script>
+
+    <script defer src="script.js"></script>
 </head>
 
 <body>
@@ -14,40 +27,39 @@
 
         <div class="card">
 
-            <img src="logo.png" class="logo" alt="ECAE Logo">
+            <img
+                src="logo.png"
+                class="logo"
+                alt="ECAE Logo"
+            >
 
-            <h1>Emirates College for Advanced Education</h1>
+            <h1>
+                Emirates College for Advanced Education
+            </h1>
 
-            <h2>كلية الإمارات للتطوير التربوي</h2>
+            <h2>
+                كلية الإمارات للتطوير التربوي
+            </h2>
 
             <div id="status">
-                Ready
+                Preparing camera...
             </div>
 
             <video
                 id="video"
                 autoplay
                 playsinline
-                muted
-                style="
-                    width:100%;
-                    max-width:600px;
-                    min-height:300px;
-                    background:black;
-                    border:3px solid #0078d4;
-                    border-radius:15px;
-                ">
+                muted>
             </video>
 
             <div id="message">
-                Waiting for someone...
+                Loading face detection...
             </div>
 
         </div>
 
     </div>
 
-    <script src="script.js"></script>
-
 </body>
+
 </html>

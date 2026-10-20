@@ -1,6 +1,7 @@
 const video = document.getElementById("video");
 const statusText = document.getElementById("status");
 const message = document.getElementById("message");
+const startBtn = document.getElementById("startBtn");
 
 let greeted = false;
 
@@ -22,14 +23,13 @@ async function startCamera() {
 
         video.srcObject = stream;
 
-        statusText.innerHTML = "✅ Ready";
+        statusText.innerHTML = "✅ Camera Connected";
 
         detectFace();
 
     } catch (error) {
 
-        statusText.innerHTML =
-            "❌ Please allow camera access";
+        statusText.innerHTML = "❌ Camera Access Denied";
 
         console.error(error);
     }
@@ -38,6 +38,8 @@ async function startCamera() {
 async function detectFace() {
 
     const model = await blazeface.load();
+
+    statusText.innerHTML = "✅ Waiting For Visitor";
 
     setInterval(async () => {
 
@@ -48,26 +50,21 @@ async function detectFace() {
 
             greeted = true;
 
-            statusText.innerHTML =
-                "👤 Visitor Detected";
+            statusText.innerHTML = "👤 Visitor Detected";
 
             const randomGreeting =
                 greetings[
-                    Math.floor(
-                        Math.random() *
-                        greetings.length
-                    )
+                    Math.floor(Math.random() * greetings.length)
                 ];
 
-            message.innerHTML =
-                randomGreeting;
+            message.innerHTML = randomGreeting;
 
             setTimeout(() => {
 
                 message.innerHTML = "";
 
                 statusText.innerHTML =
-                    "✅ Ready";
+                    "✅ Waiting For Visitor";
 
                 greeted = false;
 
@@ -77,6 +74,4 @@ async function detectFace() {
     }, 1000);
 }
 
-window.addEventListener("load", () => {
-    startCamera();
-});
+startBtn.addEventListener("click", startCamera);

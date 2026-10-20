@@ -36,8 +36,24 @@
             id="video"
             autoplay
             playsinline
-            muted>
+            muted
+            style="
+                width:100%;
+                max-width:600px;
+                min-height:300px;
+                background:black;
+                border:3px solid #0078d4;
+                border-radius:15px;
+            ">
         </video>
+        
+        <p id="status">Waiting for camera...</p>
+        
+        <div id="message"></div>
+        
+        <button id="startBtn">
+            Start Experience
+        </button>
 
     </div>
 

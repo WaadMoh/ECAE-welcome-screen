@@ -1,6 +1,9 @@
-document.getElementById("startBtn").addEventListener("click", async () => {
+const startBtn = document.getElementById("startBtn");
+const statusText = document.getElementById("status");
 
-    alert("Button Works!");
+startBtn.addEventListener("click", async () => {
+
+    statusText.innerHTML = "Button clicked";
 
     try {
 
@@ -8,13 +11,14 @@ document.getElementById("startBtn").addEventListener("click", async () => {
             video: true
         });
 
-        alert("Camera Success!");
+        statusText.innerHTML = "✅ Camera connected";
 
-    } catch (err) {
+    } catch (error) {
 
-        alert("Camera Error: " + err.message);
+        statusText.innerHTML =
+            "❌ " + error.message;
 
-        console.log(err);
+        console.log(error);
 
     }
 

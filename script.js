@@ -1,35 +1,82 @@
 const video = document.getElementById("video");
-const status = document.getElementById("status");
+const statusText = document.getElementById("status");
 const message = document.getElementById("message");
 
-document
-.getElementById("startBtn")
-.addEventListener("click", initialize);
 let greeted = false;
 
-const messages = [
+const greetings = [
     "👋 Welcome to ECAE",
-    "🌟 Have a wonderful day",
-    "😊 Great to see you today",
-    "🎓 Welcome to Emirates College for Advanced Education"
+    "🎓 Welcome Student",
+    "😊 Great To See You Today",
+    "🌟 Have A Wonderful Day",
+    "👋 مرحباً بكم في كلية الإمارات للتطوير التربوي"
 ];
 
 async function startCamera() {
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-        video:true
-    });
+    try {
 
-    video.srcObject = stream;
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: true
+        });
+
+        video.srcObject = stream;
+
+        statusText.innerHTML = "✅ Ready";
+
+        detectFace();
+
+    } catch (error) {
+
+        statusText.innerHTML =
+            "❌ Please allow camera access";
+
+        console.error(error);
+    }
 }
 
-async function runDetection() {
+async function detectFace() {
 
     const model = await blazeface.load();
 
     setInterval(async () => {
 
         const predictions =
-            await model.estimateFaces(video,false);
+            await model.estimateFaces(video, false);
 
-        if(predictions.length > 0 
+        if (predictions.length > 0 && !greeted) {
+
+            greeted = true;
+
+            statusText.innerHTML =
+                "👤 Visitor Detected";
+
+            const randomGreeting =
+                greetings[
+                    Math.floor(
+                        Math.random() *
+                        greetings.length
+                    )
+                ];
+
+            message.innerHTML =
+                randomGreeting;
+
+            setTimeout(() => {
+
+                message.innerHTML = "";
+
+                statusText.innerHTML =
+                    "✅ Ready";
+
+                greeted = false;
+
+            }, 5000);
+        }
+
+    }, 1000);
+}
+
+window.addEventListener("load", () => {
+    startCamera();
+});

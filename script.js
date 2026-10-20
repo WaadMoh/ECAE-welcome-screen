@@ -2,9 +2,10 @@ const video = document.getElementById("video");
 const statusText = document.getElementById("status");
 const message = document.getElementById("message");
 
-window.addEventListener("load", async () => {
+async function startCamera() {
     try {
-        statusText.innerHTML = "Starting camera...";
+
+        statusText.textContent = "Starting camera...";
 
         const stream = await navigator.mediaDevices.getUserMedia({
             video: true,
@@ -13,11 +14,18 @@ window.addEventListener("load", async () => {
 
         video.srcObject = stream;
 
-        statusText.innerHTML = "✅ Camera Connected";
-        message.innerHTML = "Waiting for someone...";
+        await video.play();
+
+        statusText.textContent = "✅ Camera Connected";
+        message.textContent = "👋 Welcome to ECAE";
 
     } catch (error) {
-        statusText.innerHTML = "❌ Camera Error: " + error.message;
+
+        statusText.textContent =
+            "❌ Camera Error: " + error.message;
+
         console.error(error);
     }
-});
+}
+
+window.addEventListener("load", startCamera);

@@ -1,24 +1,30 @@
-const startBtn = document.getElementById("startBtn");
+const video = document.getElementById("video");
 const statusText = document.getElementById("status");
+const message = document.getElementById("message");
+const startBtn = document.getElementById("startBtn");
 
 startBtn.addEventListener("click", async () => {
 
-    statusText.innerHTML = "Button clicked";
-
     try {
+
+        statusText.innerHTML = "Starting camera...";
 
         const stream = await navigator.mediaDevices.getUserMedia({
             video: true
         });
 
-        statusText.innerHTML = "✅ Camera connected";
+        video.srcObject = stream;
+
+        statusText.innerHTML = "✅ Camera Connected";
+
+        message.innerHTML = "👋 Welcome to ECAE";
 
     } catch (error) {
 
         statusText.innerHTML =
-            "❌ " + error.message;
+            "❌ Camera Error: " + error.message;
 
-        console.log(error);
+        console.error(error);
 
     }
 

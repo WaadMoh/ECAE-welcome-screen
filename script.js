@@ -18,7 +18,9 @@ async function startCamera() {
 
         statusText.textContent = "✅ Camera Connected";
 
-        message.textContent = "Loading detection...";
+        message.textContent = "Waiting for someone...";
+
+        console.log("NEW JS FILE LOADED");
 
     } catch (error) {
 

@@ -2,8 +2,6 @@ const video = document.getElementById("video");
 const statusText = document.getElementById("status");
 const message = document.getElementById("message");
 
-let model;
-
 async function startCamera() {
     try {
 
@@ -20,9 +18,7 @@ async function startCamera() {
 
         statusText.textContent = "✅ Camera Connected";
 
-        message.textContent = "Waiting for someone...";
-
-        detectPerson();
+        message.textContent = "Loading detection...";
 
     } catch (error) {
 
@@ -31,32 +27,6 @@ async function startCamera() {
 
         console.error(error);
     }
-}
-
-async function detectPerson() {
-
-    model = await blazeface.load();
-
-        setInterval(async () => {
-
-            const predictions = await model.estimateFaces(video, false);
-        
-            if (
-                predictions.length > 0 &&
-                predictions[0].probability &&
-                predictions[0].probability[0] > 0.95
-            ) {
-        
-                message.textContent = "👋 Welcome to ECAE!";
-        
-            } else {
-        
-                message.textContent = "Waiting for someone...";
-        
-            }
-        
-        }, 1000);
-
 }
 
 window.addEventListener("load", startCamera);

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ECAE Welcome Screen</title>
 
 <link rel="stylesheet" href="style.css">
@@ -13,24 +14,34 @@
 
 <body>
 
-<div class="container">
+<div class="overlay">
 
-    <h1>ECAE Welcome Screen</h1>
+    <div class="card">
 
-    <button id="startBtn">Start Camera</button>
+        <img src="logo.png" class="logo" alt="ECAE Logo">
 
-    <div id="status">
-        Waiting to start...
+        <h1>Emirates College for Advanced Education</h1>
+
+        <h2>كلية الإمارات للتطوير التربوي</h2>
+
+        <div id="status">
+            Loading camera...
+        </div>
+
+        <div id="message"></div>
+
+        <button id="startBtn">
+            Start Experience
+        </button>
+
+        <video
+            id="video"
+            autoplay
+            playsinline
+            muted>
+        </video>
+
     </div>
-
-    <video
-        id="video"
-        autoplay
-        playsinline
-        muted>
-    </video>
-
-    <div id="message"></div>
 
 </div>
 

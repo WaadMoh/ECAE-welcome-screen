@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECAE Welcome Screen</title>
 
-<title>ECAE Welcome Screen</title>
-
-<link rel="stylesheet" href="style.css">
-<script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="overlay">
+    <div class="overlay">
 
-    <div class="card">
+        <div class="card">
 
-        <img src="logo.png" class="logo" alt="ECAE Logo">
+            <img src="logo.png" class="logo" alt="ECAE Logo">
 
-        <h1>Emirates College for Advanced Education</h1>
+            <h1>Emirates College for Advanced Education</h1>
 
-        <h2>كلية الإمارات للتطوير التربوي</h2>
+            <h2>كلية الإمارات للتطوير التربوي</h2>
 
-        <div id="status">
-            Starting camera...
-        </div>
+            <div id="status">
+                Ready
+            </div>
 
-        <video
-            id="video"
-            autoplay
-            playsinline
-            muted
-            style="
-                width:100%;
-                max-width:600px;
-                min-height:300px;
-                background:black;
-                border:3px solid #0078d4;
-                border-radius:15px;
-            ">
-        </video>
+            <video
+                id="video"
+                autoplay
+                playsinline
+                muted
+                style="
+                    width:100%;
+                    max-width:600px;
+                    min-height:300px;
+                    background:black;
+                    border:3px solid #0078d4;
+                    border-radius:15px;
+                ">
+            </video>
 
-        <div id="message">
-            Waiting for someone...
+            <div id="message">
+                Waiting for someone...
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
